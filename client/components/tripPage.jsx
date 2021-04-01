@@ -7,9 +7,7 @@ export default function Trip(props) {
   // Pull state into component from TripContext using 'useContext' hook
   const [tripInfo, setTripInfo] = useContext(TripContext);
   const trip = tripInfo[index]; // object
-  const {
-    location, date, radius, budget,
-  } = trip;
+  const { location, date, radius, budget } = trip;
 
   const handleDelete = (e) => {
     const tripDelete = trip._id;
@@ -28,19 +26,36 @@ export default function Trip(props) {
       .catch((err) => console.log('error has occurred in Fetching LoginInfo'));
   };
 
-  const activities = ['Breakfast', 'Lunch', 'Dinner', 'Hotels', 'Active', 'Arts', 'Nightlife', 'Shopping'];
+  const activities = [
+    'Breakfast',
+    'Lunch',
+    'Dinner',
+    'Hotels',
+    'Active',
+    'Arts',
+    'Nightlife',
+    'Shopping',
+  ];
   const result = activities.map((activity) => {
     if (trip[activity]) {
-      const {
-        name, url, rating, price, phone, image_url, categories,
-      } = trip[activity];
+      const { name, url, rating, price, phone, image_url, categories } = trip[
+        activity
+      ];
 
       let category = '';
-      categories.forEach((element) => { category += `${element.title}, `; });
+      categories.forEach((element) => {
+        category += `${element.title}, `;
+      });
       category = category.slice(0, category.length - 2);
 
       const {
-        city, country, address2, address3, state, address1, zip_code,
+        city,
+        country,
+        address2,
+        address3,
+        state,
+        address1,
+        zip_code,
       } = trip[activity].location;
 
       return (
@@ -48,9 +63,9 @@ export default function Trip(props) {
           <div className={activity}>
             <h3>{activity}</h3>
           </div>
-          <div className="placeInfo">
+          <div className='placeInfo'>
             <span>
-              <a href={url} target="_blank" rel="noreferrer">
+              <a href={url} target='_blank' rel='noreferrer'>
                 {name}
               </a>
               <a>
@@ -70,12 +85,7 @@ export default function Trip(props) {
             <p>{address2}</p>
             <p>{address3}</p>
             <p>
-              {city}
-              ,
-              {' '}
-              {state}
-              {' '}
-              {zip_code}
+              {city}, {state} {zip_code}
             </p>
           </div>
           <div>
@@ -89,18 +99,12 @@ export default function Trip(props) {
   return (
     <div>
       <h2>
-        {location}
-        ,
-        {' '}
-        {date}
-        ,
-        {' '}
-        {Math.ceil(radius / 1609)}
-        mi,
-        {' '}
-        {budget}
+        {location}, {date}, {Math.ceil(radius / 1609)}
+        mi, {budget}
       </h2>
-      <button className="delete" type="button" onClick={handleDelete}>Delete Trip</button>
+      <button className='delete' type='button' onClick={handleDelete}>
+        Delete Trip
+      </button>
       {result}
     </div>
   );

@@ -92,7 +92,7 @@ itineraryController.dbStore = (req, res, next) => {
 };
 
 itineraryController.getItinerary = (req, res, next) => {
-  console.log('INSIDE ITINERARY COOKIE =', req.cookies.user_id)
+  console.log('INSIDE ITINERARY COOKIE =', req.cookies.user_id);
   const str = 'SELECT * FROM itinerary WHERE user_id =$1';
   db.query(str, [req.cookies.user_id]).then((data) => {
     res.locals.yelp = data.rows;
